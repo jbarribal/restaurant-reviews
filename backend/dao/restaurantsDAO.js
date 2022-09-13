@@ -29,10 +29,29 @@ export default class RestaurantsDAO {
                 query = {"address.zipcode": {$eq: filters["zipcode"]}}
             }
         }
-    }
+        let cursor
 
-    let cursor
+        try {
+            cursor = await restaurants
+            .find(query)
+        } catch (e) {
+            console.error(`Unable to issue find command, ${e}`)
+            return {restaurantsList: [], totalNumRestaurants: 0}
+            
+        }
 
-    try {
-        
+        const displayCursor = cursor.limit(restaurantsPerPage).skip(restaurantsPerPage * page)
+
+        try {
+            const restaurantsList = await displayCursor.toArray()
+            const totalNumRestaurants = await restaurants.countDocuments(query)
+
+            return {restaurantsList, totalNumRestaurants}
+        } catch (e) {
+            console.error(
+                `Unable to convert cursor to array or problem counting documents, ${e}`,
+            )
+            return {restaurantsList: [], totalNumRestaurants: 0}
+        }
     }
+}
