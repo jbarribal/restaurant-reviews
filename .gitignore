@@ -1,0 +1,6 @@
+.gitinore
+backend/node_modules
+backend/package-lock.json
+backend/.env
+package-lock.json
+
