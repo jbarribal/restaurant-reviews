@@ -1,3 +1,6 @@
+import mongodb from "mongodb"
+const ObjectId = mongodb.ObjectID
+
 let restaurants
 
 export default class RestaurantsDAO{
@@ -97,6 +100,17 @@ export default class RestaurantsDAO{
         } catch (e) {
             console.error(`Something went wrong in getRestaurantByID: ${e}`)
             throw e
+        }
+    }
+
+    static async getCuisines(){
+        let cuisines = []
+        try {
+            cuisines = await restaurants.distinct("cuisine")
+            return cuisines
+        } catch (e) {
+            console.error(`Unable to get cuisines, ${e}`)
+            return cuisines
         }
     }
 }
