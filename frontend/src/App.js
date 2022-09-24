@@ -2,10 +2,12 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import AddReview from "./components/add-review";
-// import Restaurant from "./components/restaurants";
+import AddReview from "./components/add-review";
+import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
-// import Login from "./components/login";
+import Login from "./components/login";
+
+
 function App() {
   const [user, setUser] = React.useState(null);
 
@@ -44,7 +46,7 @@ function App() {
         </div>
       </nav>
 
-      {/* <div className="container mt-3">
+      <div className="container mt-3">
         <Switch>
           <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
           <Route 
@@ -66,7 +68,7 @@ function App() {
             )}
           />
         </Switch>
-      </div> */}
+      </div>
     </div>
   );
 }
